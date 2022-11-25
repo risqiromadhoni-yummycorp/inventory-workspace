@@ -37,3 +37,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# https://yarnpkg.com/getting-started/qa
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

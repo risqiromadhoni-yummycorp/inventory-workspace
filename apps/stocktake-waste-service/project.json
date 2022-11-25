@@ -13,7 +13,10 @@
         "outputPath": "dist/apps/stocktake-waste-service",
         "main": "apps/stocktake-waste-service/src/main.ts",
         "tsConfig": "apps/stocktake-waste-service/tsconfig.app.json",
-        "assets": ["apps/stocktake-waste-service/src/assets"]
+        "assets": ["apps/stocktake-waste-service/src/assets"],
+        "externalDependencies": "all",
+        "outputFileName": "index.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
@@ -27,6 +30,26 @@
             }
           ]
         }
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "gcloud functions deploy stocktake-waste-service --region asia-southeast2 --gen2 --runtime nodejs16 --trigger-http --entry-point apiInv --source ./dist/apps/stocktake-waste-service --allow-unauthenticated --project {args.gcpProject}"
+        ],
+        "color": true,
+        "parallel": false
+      }
+    },
+    "deploy:beta": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "gcloud beta functions deploy stocktake-waste-service --region asia-southeast2 --gen2 --runtime nodejs16 --trigger-http --entry-point apiInv --source ./dist/apps/stocktake-waste-service --allow-unauthenticated --project {args.gcpProject}"
+        ],
+        "color": true,
+        "parallel": false
       }
     },
     "serve": {
